@@ -1,6 +1,6 @@
 public class Linked {
 
-    class Node {
+    static class Node {
         int data;
         Node next;
 
@@ -137,7 +137,7 @@ public class Linked {
       return helper(head, key);
     }
 
-    // Q1 ->Reverse the Linked List
+  // Q1 ->Reverse the Linked List
     public void reverse(){
         Node prev=null;
         Node curr=tail=head;
@@ -151,7 +151,7 @@ public class Linked {
         }
         head=prev;
     }
-    // Q2->Remove nth Node from end
+  // Q2->Remove nth Node from end
 
     public void removeNthNodeFromEnd(int n){
         int sz=0;
@@ -176,9 +176,9 @@ public class Linked {
         return;
     }
 
-    // Q3 check if LL is palindrome
+  // Q3 check if LL is palindrome
 
-    // fast and slow pointer to find the mid
+     // fast and slow pointer to find the mid
     public Node findMid(Node head){
         Node slow=head;
         Node fast=head;
@@ -220,24 +220,79 @@ public class Linked {
         return true;
     }
 
+// Q4 Detecting a cycle/loop
+
+public static boolean isCycle(){
+    Node slow=head;
+    Node fast=head;
+    while (fast!=null && fast.next!=null) {
+        slow=slow.next;
+        fast=fast.next.next;
+        if (slow==fast) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Q5 Removed a Cycle/loop
+
+  public static void removeCycle(){
+    // step 1 -> detect a cycle
+    Node slow = head;
+    Node fast=head;
+    boolean cycle =false;
+    while (fast!=null && fast.next!=null) {
+        slow=slow.next;
+        fast=fast.next.next;
+        if (slow==fast) {
+            cycle=true;
+            break;
+        }
+    }
+    if (cycle==false) {
+        return;
+    }
+
+    // step 2->
+    slow=head;
+    Node prev = null;
+    while (slow!=fast) {
+        prev=fast; //last node
+        slow=slow.next;
+        fast=fast.next;
+    }
+
+    // step3
+    prev.next=null;
+  }
+
     public static void main(String[] args) {
-          Linked ll = new Linked();
-          ll.addFirst(2);
-          ll.addFirst(1);
-          ll.addLast(1);
-          ll.addLast(5);
-        //   ll.add(2, 3);
+        //   Linked ll = new Linked();
+        //   ll.addFirst(2);
+        //   ll.addFirst(1);
+        //   ll.addLast(1);
+        //   ll.addLast(5);
+        // //   ll.add(2, 3);
+
+        // //   ll.print();
+        // //   System.out.println(ll.removeLast());
 
         //   ll.print();
-        //   System.out.println(ll.removeLast());
-
-          ll.print();
-        //   ll.reverse();
-        // ll.removeNthNodeFromEnd(3);         
-        //   System.out.println(ll.size);
-        // System.out.println(ll.recSearch(3));
-        // System.out.println(ll.iterSearch(10));
-        // ll.print();
-        System.out.println(ll.checkPalindrome());
+        // //   ll.reverse();
+        // // ll.removeNthNodeFromEnd(3);         
+        // //   System.out.println(ll.size);
+        // // System.out.println(ll.recSearch(3));
+        // // System.out.println(ll.iterSearch(10));
+        // // ll.print();
+        // System.out.println(ll.checkPalindrome());
+        head=new Node(1);
+        Node temp=new Node(2);
+        head.next=temp;
+        head.next.next=new Node(3);
+        head.next.next.next=temp;
+        System.out.println(isCycle());
+        removeCycle();
+        System.out.println(isCycle());
     }
 }
