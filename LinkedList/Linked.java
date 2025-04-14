@@ -267,6 +267,7 @@ public static boolean isCycle(){
     prev.next=null;
   }
 
+//Q6 merge sort LinkedList
   private Node getMide(Node head){
     Node slow =head;
     Node fast=head.next;
@@ -322,15 +323,61 @@ public static boolean isCycle(){
    return merge(lefthalf,rightHalf);
   }
 
+// Q7 -> Zig-Zig LinkedList 
+
+public void zigzag(){
+    // step1-> find mid
+    Node slow=head;
+    Node fast=head.next;
+
+    while (fast!=null && fast.next!=null) {
+        slow=slow.next;
+        fast=fast.next.next;
+    }
+   Node mid=slow;
+    // step2->reverse 2nd half
+    Node curr=mid.next;
+    mid.next=null;
+    Node prev =null;
+    Node next;
+
+    while (curr!=null) {
+        next=curr.next;
+        curr.next=prev;
+        prev=curr;
+        curr=next;
+    }
+
+    // step3-> merge,Zig-zag
+    Node left=head;
+    Node right=prev;
+    Node nextL,nextR;
+
+    while (left!=null && right!=null) {
+        nextL=left.next;
+        left.next=right;
+        nextR=right.next;
+        right.next=nextL;
+
+        left=nextL;
+        right=nextR;
+
+    }
+
+}
+
+
     public static void main(String[] args) {
           Linked ll = new Linked();
-          ll.addFirst(4);
-          ll.addFirst(5);
+          ll.addFirst(2);
+          ll.addFirst(1);
           ll.addLast(3);
-          ll.addLast(2);
-          ll.addLast(1);
+          ll.addLast(4);
+          ll.addLast(5);
+          ll.addLast(6);
           ll.print();
-          ll.head=ll.mergeSort(ll.head);
+        //   ll.head=ll.mergeSort(ll.head);
+        ll.zigzag();
           ll.print();
         // //   ll.add(2, 3);
 
