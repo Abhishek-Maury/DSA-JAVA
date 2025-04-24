@@ -13,7 +13,7 @@
         "Problems",
         "Patterns",
         "OOPS/OOPS1",
-        "LinkedList.java",
+        "LinkedList",
         "Linear Search",
         "Heaps",
         "Hashing",
@@ -21,6 +21,6 @@
         "Graph",
         "Dynamic Programming",
         "Backtraking/Maze Problem",
-        "LinkedList"
+        "Stack"
     ]
 }
